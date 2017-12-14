@@ -1,0 +1,108 @@
+/* ------------------------------------------------------------------
+ * Author: Nicholas Christensen					User ID: nwchrist
+ * Due Date: 11/18/2017
+ * Class: CS3331
+ * Program Assignment #4
+ * File Name: README
+ * File Purpose:
+ * 		This file is the README for program 4.
+ * ------------------------------------------------------------------  */
+ 
+A.	The basis of this program is that a specified number of baby eagles
+	eat out of a speicified number of pots. The pots are refilled by are
+	mother eagle when a baby eagle tells the mother eagle to refill them.
+	One baby eagle can eat out of a pot at a time, and a baby eagle eats
+	the full content of the pot that it eats out of. The mother sleeps
+	after she has refilled the pots, and cannot be woken up again until
+	the pots are all empty. The babies wait if they cannot eat until the
+	pots are refilled.
+	
+B.	My program works through the use of four semaphores and one mutex.
+	The semaphores are used to signal when the mother is needed, when
+	an eagle is eating, when the mother as sleeping, and also as a
+	queue for eagles that are waiting to eat. The mutex is used to
+	ensure mutual exclusion and avoid race conditions. There are also
+	a number of ints that are used to keep track of statistics to output
+	as well as to keep track of specifications for the program such as
+	the number of baby eagles and pots.
+	
+1.	There is a semaphore called foodQueue in my program, this semaphore
+	is signaled by the mother when she refills the pots. The mother
+	signals this semaphore a number of times (m) equal to the number of
+	pots avaliable. Whenever a baby eagle wants to eat, it has to
+	Wait() at this semaphore at some point. Since the mother never
+	signals this semaphore more than m times per feeding, and all eagles
+	must finish eating before the mother starts a new feeding, it is
+	impossible for more than m baby eagles to ever be eating at the
+	same time.
+	
+2.	Similar to the above answer, all baby eagles have to Wait() at the
+	foodQueue semaphore at some point before they can eat. Since semaphores
+	are mutually exclusive, it is guarenteed that if m other baby eagles
+	have already called Wait() on this semaphore, the next baby eagle will
+	be blocked when it tries to get through. Since there are m pots and more
+	signals to the semaphore, once all the possible eagles have made it through
+	the semaphore, there will be no more open pots, and all other incoming eagles
+	will be forced to wait.
+	
+3.	Similar to the two above answers, all baby eagles have to Wait() at the
+	foodQueue semaphore at some point before they can eat, and as long as there
+	is an open pot, that semaphore will have a counter > 0, meaning an incoming
+	baby eagle will be able to pass through without being blocked to eat the
+	food. Additionally, no other barricades exist to block a ready to eat eagle.
+	
+4.	I have proved that only as many eagles as there are food pots can get
+	in to eat. When an eagle enters to eat, it always eats from the highest
+	number pot avaliable and then decreases a counter to the next pot. Thus,
+	each consecutive baby eagle will eat from the pot one to the left of the
+	eagle before it. Since accessing this counter is mutually exclusive, no
+	two eagles will ever eat from the same pot in one feeding.
+	
+5.	Similarly to my answer above, since each baby eagle always eats from the
+	pot one to the left of the eagle before it, and this process of accessing
+	the pot counter is mutually exclusive, and considering that only as many
+	eagles as there are pots can get in to eat, it is impossible for two
+	eagles to eat from the same pot in one feeding.
+	
+6.	There is an int called motherSignaled in my program. Whenever an eagle
+	decides that it should wake up the mother, it checks if the motherSignaled
+	int is 1. If that int is 0, then the eagle sets the int to 1 and wakes up
+	the mother. If the int is 1, then the eagle does not wake up the mother.
+	Since the access to this variable is mutually exclusive, once a baby
+	has signaled the mother, the rest of the baby eagles will not be able
+	to pass this int check, thus not allowing them to signal the mother again.
+	
+7.	The mother eagle calls Wait() on a semaphore called motherNeeded when
+	she goes to sleep. This semaphore is only ever signaled by baby eagles,
+	thus the mother only ever wakes up when a baby eagle wakes her up.
+	
+8.	The mother signals a semaphore called motherSleeping() when she goes 
+	to sleep. Whenever a baby eagle wants to wake up the mother, that eagle
+	must first Wait() on that semaphore which is initialized with a counter
+	of zero. This means that unless the mother has already called Signal()
+	and is sleeping, baby eagles will get blocked until the mother is sleeping.
+	Thus, no baby eagle can wake up the mother until she is napping.
+	
+9.	The mother waits on a semaphore called someoneEating before she refills
+	the pots. This semaphore is initialized with a counter of 1 and the first
+	baby eagle to start eating always calls Wait() on it, and the last baby
+	eagle to eat always calls Signal() on it. This means that the mother can
+	not get through the someoneEating semaphore until no babies are eating.
+	Once the mother calls Wait() on someoneEating, no babies can get through
+	it until the mother Signals() it. Thus, until the mother refills all of
+	the feeding pots, no babies can enter and try to start eating.
+	
+10.	After the mother refills the feeding pots and before she goes to sleep
+	she calls signal on the semaphore foodQueue a number of times equal to 
+	the number of pots. This ensures that the baby eagles will be able to enter 
+	and start eating.
+	
+11.	Since the mother always waits for all eagles to finish eating before she
+	starts to refill the pots, the mother simply checks before she refills the
+	pots if she is done, and if she is all the eagles are already done eating,
+	so the program can terminate gracefully and simply. She also only ever refills
+	the pots when a baby eagle calls her, and baby eagles only ever call her when
+	all the pots are empty, so it is guarenteed that if the mother runs all pots
+	are empty and all eagles are done eating.
+	
+ 
