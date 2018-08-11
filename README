@@ -1,7 +1,6 @@
 /*
  * Author: Nicholas Christensen
  * Date: 11/18/2017
- * Class: CS3331
  */
  
  This program is an exercise in multi-threading using baby eagles as threads accessing shared data which is food.
