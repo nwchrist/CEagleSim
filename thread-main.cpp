@@ -1,9 +1,8 @@
-/* ------------------------------------------------------------------
- * Author: Nicholas Christensen					User ID: nwchrist
- * Due Date: 11/18/2017
+/*
+ * Author: Nicholas Christensen
+ * Date: 11/18/2017
  * Class: CS3331
- * Program Assignment #4
- * File Name: thread-main.cpp
+ *
  * File Purpose:
  * 		This file contains the main program. The main program contains
  * 		the actions of the mother eagle.
