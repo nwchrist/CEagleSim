@@ -1,9 +1,7 @@
-/* ------------------------------------------------------------------
- * Author: Nicholas Christensen					User ID: nwchrist
- * Due Date: 11/18/2017
+/*
+ * Author: Nicholas Christensen
+ * Date: 11/18/2017
  * Class: CS3331
- * Program Assignment #4
- * File Name: thread.h
  * File Purpose:
  *		This file contains the class definitions of my threads.
  * ------------------------------------------------------------------  */
