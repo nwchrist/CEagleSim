@@ -3,7 +3,7 @@
  * Date: 11/18/2017
  * File Purpose:
  *		This file contains the class definitions of my threads.
- * ------------------------------------------------------------------  */
+ */
  
  #include "ThreadClass.h"
  
