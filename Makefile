@@ -1,7 +1,5 @@
-/*
-* Author: Nicholas Christensen
-* Date: 11/18/2017
-*/
+# Author: Nicholas Christensen
+# Date: 11/18/2017
 
 CC       = c++
 FLAGS    = 
