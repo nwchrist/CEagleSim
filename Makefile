@@ -1,12 +1,7 @@
-#/* ------------------------------------------------------------------
-#* Author: Nicholas Christensen					User ID: nwchrist
-#* Due Date: 11/18/2017
-#* Class: CS3331
-#* Program Assignment #4
-#* File Name: Makefile
-#* File Purpose:
-#*		This file contains compilation specifications for program 4
-#* ------------------------------------------------------------------  */
+/*
+* Author: Nicholas Christensen
+* Date: 11/18/2017
+*/
 
 CC       = c++
 FLAGS    = 
