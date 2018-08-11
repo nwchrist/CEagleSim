@@ -1,7 +1,6 @@
 /*
  * Author: Nicholas Christensen
  * Date: 11/18/2017
- * Class: CS3331
  */
  
 #include "thread.h"
