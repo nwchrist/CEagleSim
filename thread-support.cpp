@@ -1,9 +1,6 @@
-/* ------------------------------------------------------------------
- * Author: Nicholas Christensen					User ID: nwchrist
- * Due Date: 11/18/2017
- * Class: CS3331
- * Program Assignment #4
- * File Name: thread-support.cpp
+/*
+ * Author: Nicholas Christensen
+ * Date: 11/18/2017
  * File Purpose:
  *		This file contains the supporting functions for the program.
  * ------------------------------------------------------------------  */
